@@ -17,17 +17,23 @@ app.use(express.json({limit : "50mb"})) // for the limit of the body parser data
 // Cookie parser :
 app.use(cookieParser());  
 
-// cors => cross origin resources sharing :(we can add a property in which origin we can access this api ...)
-app.use( 
-    cors({
-        origin : ["http://localhost:3000"],
-        credentials:true
-    })     
-)
+// // cors => cross origin resources sharing :(we can add a property in which origin we can access this api ...)
+// app.use( 
+//     cors({
+//         origin : ["http://localhost:3000"],
+//         credentials:true
+//     })     
+// )
   
 app.use("/api/v1" , userRouter , courseRouter , orderRouter ,notificationRoute , analyticsRouter , layoutRouter)
 
 // testing api : 
+app.get("/" , (req:Request , res:Response , next:NextFunction) => {  
+    res.status(200).json({  
+        success : true , 
+        message : "API is working" ,     
+    }) 
+}) 
 app.get("/test" , (req:Request , res:Response , next:NextFunction) => {  
     res.status(200).json({  
         success : true , 
